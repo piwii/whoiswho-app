@@ -14,7 +14,6 @@ function App() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log(window.location.origin)
                 let response = await fetch(window.location.origin + '/data/byNative.json');
                 let data = await response.json()
                 setData(data)
