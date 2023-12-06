@@ -11,14 +11,15 @@ body {
 .AppContent {
   margin: auto !important;
   width: 380px;
-  min-height: 700px;
+  min-height: 500px;
 }
 
 .AppItem {
   min-height: 500px;
 }
 
-.AppEnd {
+.AppMessageEnd {
+  padding: 100px 0;
   color: lightgreen;
   font-size: 32px;
   text-align: center;
