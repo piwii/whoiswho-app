@@ -14,13 +14,12 @@ function App() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let response = await fetch(window.location.origin + '/data/byNative.json');
+                let response = await fetch(window.location.href + '/data/byNative.json');
                 let data = await response.json()
                 setData(data)
+                setLoading(false)
             } catch (error) {
                 console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false)
             }
         };
         fetchData();
@@ -70,7 +69,7 @@ function GameMenu(props) {
 function GameResult(props) {
 
     function shareOnWhatApp() {
-        const text = "J'ai essayé l'application WhoIsWho pour apprendre à mieux connaitre ses collègues. J'ai eu " + props.score + " bonnes réponses sur le quizz " + props.propertyToGuess + "! Tu veux essayer de me battre : " + window.location.origin;
+        const text = "J'ai essayé l'application WhoIsWho pour apprendre à mieux connaitre ses collègues. J'ai eu " + props.score + " bonnes réponses sur le quizz " + props.propertyToGuess + "! Tu veux essayer de me battre : " + window.location.href;
         window.location.href = "whatsapp://send?text=" + text;
     }
 
@@ -111,7 +110,7 @@ function GameCard(props) {
 
     return (
         <Stack spacing={1}>
-            <img src={props.item.img} alt='avatar'/>
+            <img src={window.location.href + props.item.img} alt='avatar'/>
             { createAnswerList().map((answer, index) => {
                 return (
                     <Button key={index} variant="outlined" onClick={() => props.checkAnswer(props.item[props.itemProperty], answer)}>{answer}</Button>
