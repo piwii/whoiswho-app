@@ -3,6 +3,7 @@ import {fakerFR as faker} from '@faker-js/faker'
 import Grid from '@mui/system/Unstable_Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import './App.css';
 
@@ -87,11 +88,10 @@ function GameResult(props) {
 }
 
 function GameCard(props) {
-    const [buttonColor, setButtonColor] = useState(new Array(props.nbAnswers).fill("primary"))
+    const [buttonColors, setButtonColors] = useState(new Array(props.nbAnswers).fill("primary"))
     const [answers, setAnswers] = useState([])
 
     useEffect(() => {
-        setButtonColor(new Array(props.nbAnswers).fill("primary"))
         setAnswers(createAnswerList(props.nbAnswers))
     }, [props.item])
 
@@ -115,13 +115,22 @@ function GameCard(props) {
         return answers.sort((a, b) => 0.5 - Math.random())
     }
 
-    function checkAnswer(buttonIndex, answer) {
-        const isGood = props.item[props.itemProperty] === answer
-        setButtonColor((prevColors) => {
+    function setButtonColor(buttonIndex, color) {
+        setButtonColors((prevColors) => {
             const updatedColors = [...prevColors];
-            updatedColors[buttonIndex] = isGood ? 'success' : 'error';
+            updatedColors[buttonIndex] = color;
             return updatedColors;
         });
+    }
+
+    function checkAnswer(buttonIndex, answer) {
+        const isGood = props.item[props.itemProperty] === answer
+
+        setButtonColor(buttonIndex, isGood ? 'success' : 'error')
+
+        setTimeout(function() {
+            setButtonColor(buttonIndex, 'primary');
+        }, 900);
 
         setTimeout(function() {
             props.goToNextStep(isGood)
@@ -133,7 +142,7 @@ function GameCard(props) {
             <img src={window.location.href + props.item.img} alt='avatar'/>
             { answers.map((answer, index) => {
                 return (
-                    <Button key={index} variant="outlined" color={buttonColor[index]} onClick={() => checkAnswer(index, answer)}>{answer}</Button>
+                    <Button key={index} variant="outlined" color={buttonColors[index]} onClick={() => checkAnswer(index, answer)}>{answer}</Button>
                 )
             })}
         </Stack>
@@ -142,6 +151,7 @@ function GameCard(props) {
 
 function Game(props) {
     const [isEnd, setEnd] = useState(false);
+    const [progress, setProgress] = useState(0);
     const [score, setScore] = useState(0);
     const [itemIndex, setItemIndex] = useState(0);
 
@@ -155,6 +165,7 @@ function Game(props) {
         } else {
             setItemIndex(itemIndex + 1);
         }
+        setProgress((itemIndex + 1) * 100 / props.itemList.length);
     }
 
     return (
@@ -167,6 +178,9 @@ function Game(props) {
             </Grid>
             <Grid xs={12} className="AppHeader">
                 Connaissez vous suffisamment vos collègues ?
+            </Grid>
+            <Grid xs={12}>
+                <LinearProgress variant="determinate" value={progress} />
             </Grid>
             <Grid className="AppItem" xs={12}>
                 {isEnd
