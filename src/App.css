@@ -1,6 +1,8 @@
 body {
   background-color: #282c34;
+  text-align: center;
 }
+
 .AppHeader {
   margin: auto;
   font-size: calc(5px + 2vmin);
@@ -12,6 +14,12 @@ body {
   margin: auto !important;
   width: 380px;
   min-height: 500px;
+}
+
+.AppLoading {
+  margin-top: 250px;
+  width: 100px !important;
+  height: 100px !important;
 }
 
 .AppItem {
