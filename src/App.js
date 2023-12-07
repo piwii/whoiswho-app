@@ -87,11 +87,18 @@ function GameResult(props) {
 }
 
 function GameCard(props) {
+    const [buttonColor, setButtonColor] = useState(new Array(props.nbAnswers).fill("primary"))
+    const [answers, setAnswers] = useState([])
 
-    function createAnswerList(nbAnswers = 3)
+    useEffect(() => {
+        setButtonColor(new Array(props.nbAnswers).fill("primary"))
+        setAnswers(createAnswerList(props.nbAnswers))
+    }, [props.item])
+
+    function createAnswerList(nbAnswers)
     {
         let answers = [props.item[props.itemProperty]]
-        for (let i = 0; i < nbAnswers; i++) {
+        for (let i = 0; i < nbAnswers - 1; i++) {
             let answer
             do {
                 answer = faker.person.firstName(props.item.gender) + ' ' + faker.person.lastName()
@@ -108,12 +115,25 @@ function GameCard(props) {
         return answers.sort((a, b) => 0.5 - Math.random())
     }
 
+    function checkAnswer(buttonIndex, answer) {
+        const isGood = props.item[props.itemProperty] === answer
+        setButtonColor((prevColors) => {
+            const updatedColors = [...prevColors];
+            updatedColors[buttonIndex] = isGood ? 'success' : 'error';
+            return updatedColors;
+        });
+
+        setTimeout(function() {
+            props.goToNextStep(isGood)
+        }, 1000);
+    }
+
     return (
         <Stack spacing={1}>
             <img src={window.location.href + props.item.img} alt='avatar'/>
-            { createAnswerList().map((answer, index) => {
+            { answers.map((answer, index) => {
                 return (
-                    <Button key={index} variant="outlined" onClick={() => props.checkAnswer(props.item[props.itemProperty], answer)}>{answer}</Button>
+                    <Button key={index} variant="outlined" color={buttonColor[index]} onClick={() => checkAnswer(index, answer)}>{answer}</Button>
                 )
             })}
         </Stack>
@@ -121,20 +141,19 @@ function GameCard(props) {
 }
 
 function Game(props) {
-    const [isEnd, setEnd] = useState(false)
-    const [score, setScore] = useState(0)
-    const [itemIndex, setItemIndex] = useState(0)
+    const [isEnd, setEnd] = useState(false);
+    const [score, setScore] = useState(0);
+    const [itemIndex, setItemIndex] = useState(0);
 
-    const item = props.itemList[itemIndex];
-
-    function checkAnswer(goodAnswer, answer) {
-        if (goodAnswer === answer) {
-            setScore(score + 1)
+    function goToNextStep(isGoodAnswer) {
+        if (isGoodAnswer) {
+            setScore(score + 1);
         }
+
         if (itemIndex === props.itemList.length - 1) {
-            setEnd(true)
+            setEnd(true);
         } else {
-            setItemIndex(itemIndex + 1)
+            setItemIndex(itemIndex + 1);
         }
     }
 
@@ -152,7 +171,7 @@ function Game(props) {
             <Grid className="AppItem" xs={12}>
                 {isEnd
                     ? <GameResult score={score} numberOfQuestion={props.itemList.length} propertyToGuess={props.propertyToGuess} returnToHome={props.returnToHome}/>
-                    : <GameCard item={item} itemProperty={props.propertyToGuess} checkAnswer={checkAnswer} />
+                    : <GameCard item={props.itemList[itemIndex]} itemProperty={props.propertyToGuess} goToNextStep={goToNextStep} nbAnswers={4}/>
                 }
             </Grid>
         </Grid>
