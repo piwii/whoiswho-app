@@ -3,6 +3,7 @@ import {fakerFR as faker} from '@faker-js/faker'
 import Grid from '@mui/system/Unstable_Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import './App.css';
@@ -35,13 +36,21 @@ function App() {
     }
 
     if (isLoading) {
-        return <div>Is loading</div>
+        return <GameLoading />
     }
 
     if (propertyToGuess) {
         return <Game itemList={data.persons} propertyToGuess={propertyToGuess} returnToHome={returnToHome} />
     }
     return <GameMenu availableProperties={data.available_properties} launchApp={launchApp} />
+}
+
+function GameLoading() {
+    return (
+        <div className="AppItem">
+            <CircularProgress className="AppLoading" />
+        </div>
+    )
 }
 
 function GameMenu(props) {
