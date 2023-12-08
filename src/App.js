@@ -12,11 +12,14 @@ function App() {
     const [isLoading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [propertyToGuess, setPropertyToGuess] = useState('')
+    const searchParams = new URLSearchParams(window.location.search);
+    const fileName = searchParams.has('file') ? searchParams.get('file') : "byNative";
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let response = await fetch(window.location.href + '/data/byNative.json');
+                const url = window.location.origin + window.location.pathname + '/data/'+fileName+'.json';
+                let response = await fetch(url);
                 let data = await response.json()
                 setData(data)
                 setLoading(false)
@@ -86,7 +89,7 @@ function GameResult(props) {
     return (
         <Stack spacing={2}>
             <div className="AppMessageEnd">Bravo ! Vous avez obtenu un score de {props.score} / {props.numberOfQuestion}</div>
-            <Button variant="contained" color="success" startIcon={<WhatsAppIcon/>} onClick={() => shareOnWhatApp()}>
+            <Button className="only-mobile" variant="contained" color="success" startIcon={<WhatsAppIcon/>} onClick={() => shareOnWhatApp()}>
                 Partager
             </Button>
             <Button variant="contained" onClick={() => props.returnToHome()}>
@@ -106,6 +109,10 @@ function GameCard(props) {
 
     function createAnswerList(nbAnswers)
     {
+        if (props.itemProperty === 'drink') {
+            return ['Eau', 'Vin', 'Bière', 'Rhum', 'Ricard']
+        }
+
         let answers = [props.item[props.itemProperty]]
         for (let i = 0; i < nbAnswers - 1; i++) {
             let answer
@@ -121,6 +128,7 @@ function GameCard(props) {
             } while (answers.includes(answer))
             answers.push(answer);
         }
+
         return answers.sort((a, b) => 0.5 - Math.random())
     }
 
@@ -148,7 +156,7 @@ function GameCard(props) {
 
     return (
         <Stack spacing={1}>
-            <img src={window.location.href + props.item.img} alt='avatar'/>
+            <img src={window.location.origin + window.location.pathname + props.item.img} alt='avatar'/>
             { answers.map((answer, index) => {
                 return (
                     <Button key={index} variant="outlined" color={buttonColors[index]} onClick={() => checkAnswer(index, answer)}>{answer}</Button>

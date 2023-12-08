@@ -32,3 +32,9 @@ body {
   font-size: 32px;
   text-align: center;
 }
+
+@media screen and (min-width: 500px) {
+  .only-mobile {
+    visibility:hidden;
+  }
+}
