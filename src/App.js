@@ -101,6 +101,7 @@ function GameResult(props) {
 
 function GameCard(props) {
     const [buttonColors, setButtonColors] = useState(new Array(props.nbAnswers).fill("primary"))
+    const [buttonDisabled, setButtonDisabled] = useState(new Array(props.nbAnswers).fill(false))
     const [answers, setAnswers] = useState([])
 
     useEffect(() => {
@@ -138,6 +139,12 @@ function GameCard(props) {
             updatedColors[buttonIndex] = color;
             return updatedColors;
         });
+
+        const updatedDisabled = [];
+        for (let i = 0; i < buttonDisabled.length; i++) {
+            updatedDisabled[i] = i !== buttonIndex;
+            setButtonDisabled(updatedDisabled);
+        }
     }
 
     function checkAnswer(buttonIndex, answer) {
@@ -147,6 +154,7 @@ function GameCard(props) {
 
         setTimeout(function() {
             setButtonColor(buttonIndex, 'primary');
+            setButtonDisabled(new Array(props.nbAnswers).fill(false))
         }, 900);
 
         setTimeout(function() {
@@ -159,7 +167,7 @@ function GameCard(props) {
             <img src={window.location.origin + window.location.pathname + props.item.img} alt='avatar'/>
             { answers.map((answer, index) => {
                 return (
-                    <Button key={index} variant="outlined" color={buttonColors[index]} onClick={() => checkAnswer(index, answer)}>{answer}</Button>
+                    <Button key={index} variant="outlined" disabled={buttonDisabled[index]} color={buttonColors[index]} onClick={() => checkAnswer(index, answer)}>{answer}</Button>
                 )
             })}
         </Stack>
