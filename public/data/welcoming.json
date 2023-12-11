@@ -1,0 +1,20 @@
+{
+  "company": "byNative",
+  "available_properties": ["drink"],
+  "persons" : [{
+    "drink": "Vin",
+    "img": "/img/welcoming/avatar/mathieu.jpeg"
+  }, {
+    "drink": "Rhum",
+    "img": "/img/welcoming/avatar/stephane.jpeg"
+  }, {
+    "drink": "Eau",
+    "img": "/img/welcoming/avatar/floriant.jpeg"
+  }, {
+    "drink": "Rhum",
+    "img": "/img/welcoming/avatar/pierre-yves.jpeg"
+  },{
+    "drink": "Bière",
+    "img": "/img/welcoming/avatar/marine.jpeg"
+  }]
+}
