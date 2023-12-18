@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {fakerFR as faker} from '@faker-js/faker'
 import Grid from '@mui/system/Unstable_Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -28,7 +27,7 @@ function App() {
             }
         };
         fetchData();
-    }, []);
+    }, [fileName]);
 
     function returnToHome() {
         setPropertyToGuess('')
@@ -43,7 +42,7 @@ function App() {
     }
 
     if (propertyToGuess) {
-        return <Game itemList={data.persons} propertyToGuess={propertyToGuess} returnToHome={returnToHome} />
+        return <Game itemList={data.persons} propertyToGuess={propertyToGuess} possibleAnswers={data.available_properties[propertyToGuess]} returnToHome={returnToHome} />
     }
     return <GameMenu availableProperties={data.available_properties} launchApp={launchApp} />
 }
@@ -68,7 +67,7 @@ function GameMenu(props) {
             </Grid>
             <Grid xs={12}>
                 <Stack spacing={1}>
-                    { props.availableProperties.map((property, index) => {
+                    { Object.keys(props.availableProperties).map((property, index) => {
                         return (
                             <Button key={index} variant="outlined" onClick={() => props.launchApp(property)}>{property}</Button>
                         )
@@ -103,35 +102,23 @@ function GameCard(props) {
     const [buttonColors, setButtonColors] = useState(new Array(props.nbAnswers).fill("primary"))
     const [buttonDisabled, setButtonDisabled] = useState(new Array(props.nbAnswers).fill(false))
     const [answers, setAnswers] = useState([])
+    const correctAnswer = props.item[props.itemProperty]
 
     useEffect(() => {
-        setAnswers(createAnswerList(props.nbAnswers))
-    }, [props.item])
+        setAnswers(
+            shuffle([
+                correctAnswer,
+                ...shuffle(
+                    props.possibleAnswers.filter(answer => answer !== correctAnswer)
+                ).splice(0, props.nbAnswers - 1)
+            ])
+        )
+    }, [correctAnswer, props.possibleAnswers, props.nbAnswers])
 
-    function createAnswerList(nbAnswers)
-    {
-        if (props.itemProperty === 'drink') {
-            return ['Eau', 'Vin', 'Bière', 'Rhum', 'Ricard']
-        }
+    const shuffle = (array: string[]) => {
+        return array.sort(() => Math.random() - 0.5);
+    };
 
-        let answers = [props.item[props.itemProperty]]
-        for (let i = 0; i < nbAnswers - 1; i++) {
-            let answer
-            do {
-                answer = faker.person.firstName(props.item.gender) + ' ' + faker.person.lastName()
-                if (props.itemProperty === 'firstname') {
-                    answer = faker.person.firstName(props.item.gender)
-                } else if (props.itemProperty === 'lastname') {
-                    answer = faker.person.lastName(props.item.gender)
-                } else if (props.itemProperty === 'job') {
-                    answer = faker.person.jobType()
-                }
-            } while (answers.includes(answer))
-            answers.push(answer);
-        }
-
-        return answers.sort((a, b) => 0.5 - Math.random())
-    }
 
     function setButtonColor(buttonIndex, color) {
         setButtonColors((prevColors) => {
@@ -210,7 +197,7 @@ function Game(props) {
             <Grid className="AppItem" xs={12}>
                 {isEnd
                     ? <GameResult score={score} numberOfQuestion={props.itemList.length} propertyToGuess={props.propertyToGuess} returnToHome={props.returnToHome}/>
-                    : <GameCard item={props.itemList[itemIndex]} itemProperty={props.propertyToGuess} goToNextStep={goToNextStep} nbAnswers={4}/>
+                    : <GameCard item={props.itemList[itemIndex]} itemProperty={props.propertyToGuess} possibleAnswers={props.possibleAnswers} goToNextStep={goToNextStep} nbAnswers={4}/>
                 }
             </Grid>
         </Grid>

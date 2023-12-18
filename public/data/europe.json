@@ -1,0 +1,161 @@
+{
+  "company": "europe",
+  "available_properties": {
+    "country_name": [
+      "Albanie",
+      "Allemagne",
+      "Autriche",
+      "Belgique",
+      "Bielorussie",
+      "Bosnie Herzegovine",
+      "Bulgarie",
+      "Croatie",
+      "Danemark",
+      "Espagne",
+      "Estonie",
+      "Finlande",
+      "France",
+      "Grèce",
+      "Hongrie",
+      "Islande",
+      "Italie",
+      "Kosovo",
+      "Lettonie",
+      "Lituanie",
+      "Luxembourg",
+      "Macedoine",
+      "Moldavie",
+      "Montenegro",
+      "Norvège",
+      "Pays Bas",
+      "Pologne",
+      "Portugal",
+      "Roumanie",
+      "Royaume Uni",
+      "Russie",
+      "Serbie",
+      "Slovaquie",
+      "Slovenie",
+      "Suède",
+      "Suisse",
+      "Tchéquie",
+      "Turquie",
+      "Ukraine"
+    ]
+  },
+  "persons" : [{
+    "country_name": "Albanie",
+    "img": "/img/europe/eu-albanie.jpg"
+  }, {
+    "country_name": "Allemagne",
+    "img": "/img/europe/eu-allemagne.jpg"
+  }, {
+    "country_name": "Autriche",
+    "img": "/img/europe/eu-autriche.jpg"
+  }, {
+    "country_name": "Belgique",
+    "img": "/img/europe/eu-belgique.jpg"
+  },{
+    "country_name": "Bielorussie",
+    "img": "/img/europe/eu-bielorussie.jpg"
+  },{
+    "country_name": "Bosnie Herzegovine",
+    "img": "/img/europe/eu-bosnie-herzegovine.jpg"
+  },{
+    "country_name": "Bulgarie",
+    "img": "/img/europe/eu-bulgarie.jpg"
+  },{
+    "country_name": "Croatie",
+    "img": "/img/europe/eu-croatie.jpg"
+  },{
+    "country_name": "Danemark",
+    "img": "/img/europe/eu-danemark.jpg"
+  },{
+    "country_name": "Espagne",
+    "img": "/img/europe/eu-espagne.jpg"
+  },{
+    "country_name": "Estonie",
+    "img": "/img/europe/eu-estonie.jpg"
+  },{
+    "country_name": "Finlande",
+    "img": "/img/europe/eu-finlande.jpg"
+  },{
+    "country_name": "France",
+    "img": "/img/europe/eu-france.jpg"
+  },{
+    "country_name": "Grece",
+    "img": "/img/europe/eu-grece.jpg"
+  },{
+    "country_name": "Hongrie",
+    "img": "/img/europe/eu-hongrie.jpg"
+  },{
+    "country_name": "Islande",
+    "img": "/img/europe/eu-islande.jpg"
+  },{
+    "country_name": "Italie",
+    "img": "/img/europe/eu-italie.jpg"
+  },{
+    "country_name": "Kosovo",
+    "img": "/img/europe/eu-kosovo.jpg"
+  },{
+    "country_name": "Lettonie",
+    "img": "/img/europe/eu-lettonie.jpg"
+  },{
+    "country_name": "Lituanie",
+    "img": "/img/europe/eu-lituanie.jpg"
+  },{
+    "country_name": "Luxembourg",
+    "img": "/img/europe/eu-luxembourg.jpg"
+  },{
+    "country_name": "Macedoine",
+    "img": "/img/europe/eu-macedoine.jpg"
+  },{
+    "country_name": "Montenegro",
+    "img": "/img/europe/eu-montenegro.jpg"
+  },{
+    "country_name": "Norvege",
+    "img": "/img/europe/eu-norvege.jpg"
+  },{
+    "country_name": "Pays Bas",
+    "img": "/img/europe/eu-pays-bas.jpg"
+  },{
+    "country_name": "Pologne",
+    "img": "/img/europe/eu-pologne.jpg"
+  },{
+    "country_name": "Portugal",
+    "img": "/img/europe/eu-portugal.jpg"
+  },{
+    "country_name": "Roumanie",
+    "img": "/img/europe/eu-roumanie.jpg"
+  },{
+    "country_name": "Royaume Uni",
+    "img": "/img/europe/eu-royaume-uni.jpg"
+  },{
+    "country_name": "Russie",
+    "img": "/img/europe/eu-russie.jpg"
+  },{
+    "country_name": "Serbie",
+    "img": "/img/europe/eu-serbie.jpg"
+  },{
+    "country_name": "Slovaquie",
+    "img": "/img/europe/eu-slovaquie.jpg"
+  },{
+    "country_name": "Slovénie",
+    "img": "/img/europe/eu-slovenie.jpg"
+  },{
+    "country_name": "Suède",
+    "img": "/img/europe/eu-suede.jpg"
+  },{
+    "country_name": "Suisse",
+    "img": "/img/europe/eu-suisse.jpg"
+  },{
+    "country_name": "Tchéquie",
+    "img": "/img/europe/eu-tchequie.jpg"
+  },{
+    "country_name": "Turquie",
+    "img": "/img/europe/eu-turquie.jpg"
+  },{
+    "country_name": "Ukraine",
+    "img": "/img/europe/eu-ukraine.jpg"
+  }]
+}
