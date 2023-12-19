@@ -1,6 +1,8 @@
 {
   "company": "byNative",
-  "available_properties": ["drink"],
+  "available_properties": {
+    "drink" : ["Vin", "Rhum", "Eau", "Bière", "Ricard"]
+  },
   "persons" : [{
     "drink": "Vin",
     "img": "/img/welcoming/avatar/mathieu.jpeg"
